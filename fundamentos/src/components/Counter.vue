@@ -1,8 +1,6 @@
 <template>
     <h2>Counter</h2>
-    <p>
-        {{ counter }} <sup>2</sup> = {{ counter * counter }}
-    </p>
+    <p>{{ counter }} <sup>2</sup> = {{ squareCounter }}</p>
 </template>
 
 <script>
@@ -14,11 +12,19 @@ export default {
     },
 
     methods: {
-        
+        getSquareValue() {
+            console.log('getSquareValue') // se ejecuta las veces que es llamada
+            return this.counter * this.counter
+        }
+    },
+    computed:{
+        squareCounter() {
+            console.log('squareCounter') //  se ejecuta solo una vez
+            return this.counter * this.counter
+        }
     },
 }
 </script>
 
-<style >
-    
+<style scoped>
 </style>
