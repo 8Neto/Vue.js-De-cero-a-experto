@@ -1,5 +1,5 @@
 <template >
-    <img src="https://via.placeholder.com/250" alt="bg" >
+    <img v-if="image" :src=image alt="bg" >
 
     <div class="bg-dark"></div>
 
@@ -11,7 +11,7 @@
     <div>
 
         <h2>{{ question }}</h2>
-        <h1>Respuesta</h1>
+        <h1>{{ answer }}</h1>
     </div>
 </template>
 
@@ -19,13 +19,27 @@
 export default {
     data(){
         return {
-            question: ''
+            question: '',
+            answer: null,
+            image: null
+        }
+    },
+    methods:{
+        async getAnswer(){
+            this.answer = 'Pensando...'
+
+            const { answer, image} = await fetch('https://yesno.wtf/api').then(response => response.json())
+            this.answer = answer
+            this.image = image
+
         }
     },
     watch: {
         question(value, oldValue){
+            if(value === '') this.answer = ''
             if(!value.endsWith('?')) return
             console.log(value)
+            this.getAnswer()
         }
     }
 }
