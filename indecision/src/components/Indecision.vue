@@ -6,12 +6,11 @@
     <div class="indecision-container">
         <input type="text" placeholder="Hazme una pregunta" v-model="question">
         <p>Recuerda terminar con un signo de interrogación (?)</p>
-    </div>
-
-    <div>
-
-        <h2>{{ question }}</h2>
-        <h1>{{ answer }}</h1>
+        
+        <div v-if="isValidQuestion">
+            <h2>{{ question }}</h2>
+            <h1>{{ answer }}</h1>
+        </div>
     </div>
 </template>
 
@@ -21,7 +20,8 @@ export default {
         return {
             question: '',
             answer: null,
-            image: null
+            image: null,
+            isValidQuestion: false,
         }
     },
     methods:{
@@ -29,16 +29,19 @@ export default {
             this.answer = 'Pensando...'
 
             const { answer, image} = await fetch('https://yesno.wtf/api').then(response => response.json())
-            this.answer = answer
+            this.answer = answer === 'yes' ? 'Sí!' : answer
             this.image = image
 
         }
     },
     watch: {
         question(value, oldValue){
-            if(value === '') this.answer = ''
+
+            this.isValidQuestion = false
+
             if(!value.endsWith('?')) return
-            console.log(value)
+
+            this.isValidQuestion = true
             this.getAnswer()
         }
     }
@@ -61,7 +64,7 @@ export default {
 
     .indecision-container {
         position: relative;
-        z-index: 99;
+        z-index: 1;
     }
 
     input {
