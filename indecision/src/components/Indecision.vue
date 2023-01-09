@@ -4,20 +4,30 @@
     <div class="bg-dark"></div>
 
     <div class="indecision-container">
-        <input type="text" placeholder="Hazme una pregunta">
+        <input type="text" placeholder="Hazme una pregunta" v-model="question">
         <p>Recuerda terminar con un signo de interrogación (?)</p>
     </div>
 
     <div>
 
-        <h2>pregunta</h2>
+        <h2>{{ question }}</h2>
         <h1>Respuesta</h1>
     </div>
 </template>
 
 <script>
 export default {
-    
+    data(){
+        return {
+            question: ''
+        }
+    },
+    watch: {
+        question(value, oldValue){
+            if(!value.endsWith('?')) return
+            console.log(value)
+        }
+    }
 }
 </script>
 <style scoped>
