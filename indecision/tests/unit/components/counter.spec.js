@@ -67,4 +67,19 @@ describe('Counter Component', ()=>{
 
         expect(start).toBe(Number(value))
     })
+
+    it('Debe de mostrar el valor title', async () =>{
+
+        const title = 'Hola Mundo'
+
+        const wrapper = mount(Counter, {
+            props: {
+                title
+            }
+        })
+
+        const counterTitle = wrapper.find('h2').text()
+
+        expect(counterTitle).toBe(title)
+    })
 })
