@@ -36,4 +36,22 @@ describe('Counter Component', ()=>{
 
         expect(pValue).toBe('100')
     })
+
+    it('Debe de incrementar y reducir el valor del contador', async () =>{
+        const wrapper = mount(Counter)
+
+        const [ increaseBtn, decreaseBtn ] = wrapper.findAll('button')
+
+        await increaseBtn.trigger('click')
+
+        let value = wrapper.find('[data-test-id="counter"]').text()
+
+        expect(value).toBe('101')
+
+        await decreaseBtn.trigger('click')
+
+        value = wrapper.find('[data-test-id="counter"]').text()
+
+        expect(value).toBe('100')
+    })
 })
