@@ -2,12 +2,18 @@
 * @vitest-environment happy-dom
 */
 
-import { mount, shallowMount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { mount } from '@vue/test-utils'
+import { beforeEach, describe, expect, it } from 'vitest'
 import Counter from '@/components/Counter.vue'
 
 
 describe('Counter Component', ()=>{
+
+    let wrapper
+
+    beforeEach(()=>{
+        wrapper = mount(Counter)
+    })
     // it('debe de hacer match con el snapshot', () =>{
 
     //     const wrapper = mount( Counter )
@@ -16,7 +22,6 @@ describe('Counter Component', ()=>{
     // })
 
     it('debe de tener el valor por defeto', () =>{
-        const wrapper = mount(Counter)
 
         expect( wrapper.find('h2').exists() ).toBeTruthy()
 
@@ -26,7 +31,6 @@ describe('Counter Component', ()=>{
     })
 
     it('el valor por defecto debe ser 100 en el p', () =>{
-        const wrapper = mount(Counter)
 
         // const pTags = wrapper.findAll('p')
 
@@ -38,20 +42,19 @@ describe('Counter Component', ()=>{
     })
 
     it('Debe de incrementar y reducir el valor del contador', async () =>{
-        const wrapper = mount(Counter)
 
         const [ increaseBtn, decreaseBtn ] = wrapper.findAll('button')
 
         await increaseBtn.trigger('click')
-
-        let value = wrapper.find('[data-test-id="counter"]').text()
-
-        expect(value).toBe('101')
+        await increaseBtn.trigger('click')
+        await increaseBtn.trigger('click')
 
         await decreaseBtn.trigger('click')
+        await decreaseBtn.trigger('click')
 
-        value = wrapper.find('[data-test-id="counter"]').text()
 
-        expect(value).toBe('100')
+        const value = wrapper.find('[data-test-id="counter"]').text()
+
+        expect(value).toBe('101')
     })
 })
