@@ -1,0 +1,9 @@
+// Vitest Snapshot v1
+
+exports[`Counter Component > debe de hacer match con el snapshot 1`] = `
+"<h2 data-v-9bd91872=\\"\\">Counter</h2>
+<p data-v-9bd91872=\\"\\">10 <sup data-v-9bd91872=\\"\\">2</sup> = 100</p>
+<div data-v-9bd91872=\\"\\">
+  <!-- v-on: == @ --><button data-v-9bd91872=\\"\\">+1</button><button data-v-9bd91872=\\"\\">-1</button>
+</div>"
+`;
