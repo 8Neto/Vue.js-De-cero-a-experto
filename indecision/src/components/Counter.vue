@@ -33,7 +33,7 @@ export default {
 
     methods: {
         getSquareValue() {
-            console.log('getSquareValue') // se ejecuta las veces que es llamada
+            // console.log('getSquareValue') // se ejecuta las veces que es llamada
             return this.counter * this.counter
         },
         increase(){
@@ -45,7 +45,7 @@ export default {
     },
     computed:{
         squareCounter() {
-            console.log('squareCounter') //  se ejecuta solo una vez
+            // console.log('squareCounter') //  se ejecuta solo una vez
             return this.counter * this.counter
         },
         customTitle(){
