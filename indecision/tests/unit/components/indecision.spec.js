@@ -3,7 +3,7 @@
 */
 
 import { mount  } from '@vue/test-utils'
-import { beforeEach, describe, expect, it, vi  } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import Indecision from '@/components/Indecision.vue'
 
 
@@ -36,8 +36,15 @@ describe('Indecision Component', ()=>{
         expect( getAnswerSpy ).not.toHaveBeenCalled()
     })
 
-    it('Escribir en "?" debe disparar el fetch', () =>{
-        // expect().toMatchSnapshot()
+    it('Escribir en "?" debe disparar el getAnswer', async () =>{
+
+        const getAnswerSpy = vi.spyOn( wrapper.vm, 'getAnswer' )
+
+        const input = wrapper.find('input')
+
+        await input.setValue('Hola mundo?')
+
+        expect( getAnswerSpy ).toHaveBeenCalledTimes(1)
     })
 
     it('Pruebas en getAnswer', () =>{
