@@ -13,6 +13,14 @@ describe('Indecision Component', ()=>{
     let wrapper
     let clgSpy
 
+    global.fetch = vi.fn(() => Promise.resolve({
+        json: () => Promise.resolve({
+            'answer': 'yes',
+            'forced': false,
+            'image': 'https://yesno.wtf/assets/yes/2-5df1b403f2654fa77559af1bf2332d7a.gif'
+        })
+    }))
+
     beforeEach(()=>{
         wrapper = mount(Indecision)
 
@@ -47,12 +55,27 @@ describe('Indecision Component', ()=>{
         expect( getAnswerSpy ).toHaveBeenCalledTimes(1)
     })
 
-    it('Pruebas en getAnswer', () =>{
-        // expect().toMatchSnapshot()
+    it('Pruebas en getAnswer', async () =>{
+
+        await wrapper.vm.getAnswer()
+
+        const img = wrapper.find('img')
+        expect( img.exists() ).toBeTruthy()
+        expect( wrapper.vm.image ).toBe('https://yesno.wtf/assets/yes/2-5df1b403f2654fa77559af1bf2332d7a.gif')
+        expect( wrapper.vm.answer ).toBe('Sí!')
+
     })
 
-    it('Pruebas en getAnswer - Fallo en el API', () =>{
-        // expect().toMatchSnapshot()
+    it('Pruebas en getAnswer - Fallo en el API', async () =>{
+
+        fetch.mockImplementationOnce(() => Promise.reject('API is down'))
+
+        await wrapper.vm.getAnswer()
+
+        const img = wrapper.find('img')
+
+        expect( img.exists() ).toBeFalsy()
+        expect( wrapper.vm.answer ).toBe('No se pudo cargar del API')
     })
 
 })
