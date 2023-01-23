@@ -33,7 +33,8 @@ export default {
 img {
     height: 200px;
     position: absolute;
-    right: 32%;
+    width: 100vw;
+    margin-left: -50vw;
     user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
