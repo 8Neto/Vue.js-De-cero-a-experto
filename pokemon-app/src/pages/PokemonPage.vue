@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Quien es ese Pokémon?</h1>
-        <PokemonPicture/>
+        <PokemonPicture :pokemonId="300" :showPokemon="true"/>
         <PokemonOptions/>
     </div>
 </template>
