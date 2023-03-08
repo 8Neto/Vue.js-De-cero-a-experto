@@ -1,9 +1,5 @@
-<template>
-  <PokemonPage />
-</template>
-
 <script>
-import PokemonPage from  '@/pages/PokemonPage'
+import PokemonPage from  './pages/PokemonPage.vue'
 
 export default {
   name: 'App',
@@ -11,9 +7,14 @@ export default {
     PokemonPage
   }
 }
+
 </script>
 
-<style>
+<template>
+  <PokemonPage/>
+</template>
+
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

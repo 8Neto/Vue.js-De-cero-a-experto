@@ -16,8 +16,8 @@
     </div>
 </template>
 <script>
-import PokemonPicture from '@/components/PokemonPicture'
-import PokemonOptions from '@/components/PokemonOptions'
+import PokemonPicture from '../components/PokemonPicture.vue'
+import PokemonOptions from '../components/PokemonOptions.vue'
 
 import getPokemonOptions from '@/helpers/getPokemonOptions'
 
